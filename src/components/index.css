@@ -1,0 +1,108 @@
+#customers {
+    font-family: Arial,Helvetica,sans-serif;
+    border-collapse: collapse;
+    min-width: 100%;
+}
+
+#customers th {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: left;
+    background-color: #5f9ea0;
+    color: #fff;
+}
+
+th {
+    border: 1px solid #ddd;
+    padding: 2px;
+    min-width: 120px;
+    font-size: small;
+}
+
+#customers tr:nth-child(2n) {
+    background-color: #f2f2f2;
+}
+
+tbody, td, tfoot, th, thead, tr {
+    border-color: inherit;
+    border-style: solid;
+    border-width: 0;
+}
+
+#customers td, #customers th {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    min-width: 120px;
+    font-size: small;
+}
+
+td{
+  cursor: pointer;
+}
+
+/* modal css */
+
+/* The Modal (background) */
+.modal {
+ /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 2% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: fit-content; /* Could be more or less, depending on screen size */
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+
+.modal-content-table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+.modal-content-table-data, .modal-content-table-heading {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+.modal-content-table-row:nth-child(even) {
+    background-color: #dddddd;
+  }
+
+
+  /* header css */
+
+.app_header{
+  width: 100%;
+  height: 4rem;
+  background-color: #fff;
+  box-shadow: -1px 8px 11px 8px rgba(231,231,231,1);
+  padding-top: 2rem;
+}
