@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import ClickAwayListener from "react-click-away-listener";
 import TableRow from "./TableRow";
 import FilterDropDown from "./ColumnFilter/FilterDropDown";
 import { DEVICE_CATEGORY_COLUMN_FILTER_OPTIONS } from "../constants";
@@ -12,6 +11,8 @@ export default function Table({
   uniqueCities,
   handleCitySelection,
   handleCountrySelection,
+  selectedCities,
+  selectedCountries
 }) {
   const [showDeviceCategoryFilter, setShowDeviceCategoryFilter] =
     useState(false);
@@ -34,10 +35,11 @@ export default function Table({
           >
             <div>Device Category</div>
             {showDeviceCategoryFilter && (
-              <FilterDropDown
-                options={DEVICE_CATEGORY_COLUMN_FILTER_OPTIONS}
-                handleCheckboxSelection={() => {}}
-              />
+                <FilterDropDown
+                  options={DEVICE_CATEGORY_COLUMN_FILTER_OPTIONS}
+                  handleCheckboxSelection={() => {}}
+                  handleOutsideFilterClick={()=>setShowDeviceCategoryFilter(false)}
+                />
             )}
           </th>
           <th
@@ -53,6 +55,8 @@ export default function Table({
               <FilterDropDown
                 options={uniqueCountries}
                 handleCheckboxSelection={handleCountrySelection}
+                handleOutsideFilterClick={()=>setShowCountryFilter(false)}
+                selectedArray={selectedCountries}
               />
             )}
           </th>
@@ -69,6 +73,8 @@ export default function Table({
               <FilterDropDown
                 options={uniqueCities}
                 handleCheckboxSelection={handleCitySelection}
+                handleOutsideFilterClick={()=>setShowCityFilter(false)}
+                selectedArray={selectedCities}
               />
             )}
           </th>

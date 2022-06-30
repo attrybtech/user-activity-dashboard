@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-export default function CheckboxWithLabel({ label, handleCheckboxSelection }) {
-  const [checked, setChecked] = useState(false);
+export default function CheckboxWithLabel({ label, handleCheckboxSelection, selectedArray }) {
+  const [checked, setChecked] = useState(selectedArray.includes(label));
   return (
     <div
       className="row"
