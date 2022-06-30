@@ -4,88 +4,120 @@ import "./components/index.css";
 import Modal from "./components/Modal";
 import ClickAwayListener from "react-click-away-listener";
 import AppHeader from "./components/AppHeader";
-
-const URL = `https://ua.attryb.com/user-activity`;
-const options = ["dsc", "asc", "mobile", "desktop"];
+import {
+  getActivities,
+  getUniqueCities,
+  getUniqueCountries,
+} from "./components/services";
 
 function App() {
-  const [userActivity, setUserActity] = useState([]);
-  const [ activityData, setActivityData ] = useState([])
+  const [userActivities, setUserActivities] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState({});
   const [modalHeading, setModalHeading] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(options[0]);
+
+  const [pageSize, setPageSize] = useState(0);
+  const [page, setPage] = useState(1);
+
+  const [uniqueCountries, setUniqueCountries] = useState([]);
+  const [uniqueCities, setUniqueCities] = useState([]);
+
+  const [selectedCountries, setSelectedCountries] = useState([]);
+  const [selectedCities, setSelectedCities] = useState([]);
 
   useEffect(() => {
-    fetchUserActivities();
+    getInitialDashBoardData();
   }, []);
 
+  useEffect(() => {
+    updateCitiesByCountry();
+  }, [selectedCountries]);
+
+  useEffect(() => {
+    if (selectedCountries.length || selectedCities.length)
+      updateUserActivities();
+  }, [selectedCountries, selectedCities]);
+
+  const updateCitiesByCountry = async () => {
+    if (selectedCountries.length) {
+      const cities = await getUniqueCitiesByCountry();
+      setUniqueCities(cities);
+    }
+  };
+
+  const updateUserActivities = async () => {
+    const activities = await getUserActivities();
+    setUserActivities(activities);
+  };
+
+  const getInitialDashBoardData = async () => {
+    const activities = await getUserActivities();
+    setUserActivities(activities);
+
+    const countries = await getUniqueCountries();
+    const cities = await getUniqueCitiesByCountry();
+    setUniqueCountries(countries);
+    setUniqueCities(cities);
+    setLoading(false);
+  };
+
+  const getUniqueCitiesByCountry = async () => {
+    return await getUniqueCities(selectedCountries);
+  };
+
+  const getUserActivities = async () => {
+    const activities = await getActivities(
+      pageSize,
+      page,
+      selectedCities,
+      selectedCountries
+    );
+    return activities;
+  };
+
   const handleRowClick = (idx, property) => {
-    const activity = userActivity[idx][property];
+    const activity = userActivities[idx][property];
     setModalContent(activity);
     setModalHeading(property);
     setShowModal(true);
   };
 
-  const fetchUserActivities = async () => {
-    try {
-      const response = await fetch(URL);
-      const { data } = await response.json();
-      const { userActivity } = data[0];
-      setUserActity(userActivity);
-      setActivityData(userActivity)
-    } catch (error) {
-      console.log(error);
+  const handleCountrySelection = (value, checked) => {
+    if (checked) {
+      const tempCountries = [...selectedCountries, value];
+      setSelectedCountries([...new Set(tempCountries)]);
+    } else {
+      setSelectedCountries([
+        ...selectedCountries.filter((option) => option !== value),
+      ]);
     }
   };
-  const handleFilter = (e) => {
 
-      setLoading(true);
-      setTimeout(() => {
-        setLoading(false);
-      }, 250);
-      e.preventDefault();
-      switch (selectedOption) {
-        case options[0]:
-          setUserActity(userActivity.reverse());
-          break;
-        case options[1]:
-          setUserActity(userActivity.reverse());
-          break;
-        case options[2]:
-          const mobileArray = activityData.filter((element, idx) => {
-            if (element?.device?.deviceCategory === "mobile") return element;
-          });
-          setUserActity(mobileArray);
-          break;
-        case options[3]:
-          const desktopArray = activityData.filter((element, idx) => {
-            if (element?.device?.deviceCategory === "Desktop") return element;
-          });
-          setUserActity(desktopArray);
-          break;
-        default:
-          setUserActity(activityData)
-          break;
-      }
-  };
-
-  const handleOptionClick = (e) => {
-    setSelectedOption(e.target.value);
+  const handleCitySelection = (value, checked) => {
+    if (checked) {
+      const tempCities = [...selectedCities, value];
+      setSelectedCities([...new Set(tempCities)]);
+    } else {
+      setSelectedCities([
+        ...selectedCities.filter((option) => option !== value),
+      ]);
+    }
   };
 
   return (
     <div className="App">
-      <AppHeader
-        handleFilter={handleFilter}
-        options={options}
-        handleOptionClick={handleOptionClick}
-      />
       <Table
-        userActivity={userActivity}
+        userActivities={userActivities}
         handleRowClick={handleRowClick}
         loading={loading}
+        uniqueCountries={uniqueCountries}
+        uniqueCities={uniqueCities}
+        selectedCities={selectedCities}
+        selectedCountries={selectedCountries}
+        handleCitySelection={handleCitySelection}
+        handleCountrySelection={handleCountrySelection}
       />
       {showModal && (
         <ClickAwayListener onClickAway={() => setShowModal(false)}>
