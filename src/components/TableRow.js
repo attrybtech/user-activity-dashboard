@@ -26,9 +26,15 @@ export default function TableRow({ activity, handleRowClick, activityIdx }) {
       const miliSecs = new Date(
         timeStamp
       ).getMilliseconds();
-      return `${hour}:${mins}:${secs}:${miliSecs}`;
+      return `${hour}:${mins}:${secs}:${miliSecs} ${findMeridiemIndicator(new Date(timeStamp))} `;
     } else return null;
   };
+
+  function findMeridiemIndicator(date) {
+    var hours = date?.getHours();
+    var ampm = hours >= 12 ? 'PM' : 'AM';
+    return ampm;
+  }
 
   return (
     <tr id="table-row">
