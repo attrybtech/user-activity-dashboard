@@ -10,6 +10,9 @@ import {
 } from "./components/services";
 import Pagination from "./components/Pagination";
 import { DEFAULT_PAGE_SIZE } from "./constants";
+import './index.css'
+
+const pageArray = ["<< First", "< Prev", "Next >", "Last >>"];
 
 function App() {
   const [userActivities, setUserActivities] = useState([]);
@@ -21,14 +24,15 @@ function App() {
 
   const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE);
   const [page, setPage] = useState(1);
-  const [totalRecords, setTotalRecords] = useState(0)
+  const [totalRecords, setTotalRecords] = useState(0);
+  const [pageLength, setPageLength] = useState(0);
 
   const [uniqueCountries, setUniqueCountries] = useState([]);
   const [uniqueCities, setUniqueCities] = useState([]);
 
   const [selectedCountries, setSelectedCountries] = useState([]);
   const [selectedCities, setSelectedCities] = useState([]);
-  const [selectedDeviceCategory, setSelectedDeviceCategory] = useState('')
+  const [selectedDeviceCategory, setSelectedDeviceCategory] = useState("");
 
   useEffect(() => {
     getInitialDashBoardData();
@@ -39,9 +43,18 @@ function App() {
   }, [selectedCountries]);
 
   useEffect(() => {
-    if (selectedCountries.length || selectedCities.length ||selectedDeviceCategory.length )
+    if (
+      selectedCountries.length ||
+      selectedCities.length ||
+      selectedDeviceCategory.length ||
+      page
+    )
       updateUserActivities();
   }, [selectedCountries, selectedCities, selectedDeviceCategory, page]);
+
+  useEffect(() => {
+    setPageLength(Math.floor(totalRecords / pageSize));
+  }, [totalRecords]);
 
   const updateCitiesByCountry = async () => {
     if (selectedCountries.length) {
@@ -78,7 +91,7 @@ function App() {
       selectedCountries,
       selectedDeviceCategory
     );
-    setTotalRecords(activities.totalRecords)
+    setTotalRecords(activities.totalRecords);
     return activities?.data;
   };
 
@@ -111,7 +124,7 @@ function App() {
     }
   };
 
-  const handleDeviceCategorySelection = (value,checked) => {
+  const handleDeviceCategorySelection = (value, checked) => {
     if (checked) {
       const tempDevices = [...selectedDeviceCategory, value];
       setSelectedDeviceCategory([...new Set(tempDevices)]);
@@ -120,11 +133,32 @@ function App() {
         ...selectedDeviceCategory.filter((option) => option !== value),
       ]);
     }
-  }
+  };
 
-  const handlePageChange = (pageVal) => {
-    setPage(pageVal)
-  }
+  const handlePageChange = (pageStr) => {
+    switch (pageStr) {
+      case pageArray[0]:
+        setPage(1);
+        break;
+      case pageArray[1]:
+        setPage(page - 1);
+        break;
+      case pageArray[2]:
+        setPage(page + 1);
+        break;
+      case pageArray[3]:
+        setPage(pageLength);
+        break;
+
+      default:
+        break;
+    }
+  };
+
+  const isPaginationButtonDisable = (idx) => {
+    if( (idx === 0 && page === 1 ) || ( idx=== 1 &&  page === 1 ) || (idx === 2 && pageLength === page) || (idx === 3 && pageLength === page)  ) return true
+    return false
+  };
 
   return (
     <div className="App">
@@ -146,7 +180,15 @@ function App() {
           <Modal activity={modalContent} modalHeading={modalHeading} />
         </ClickAwayListener>
       )}
-      <Pagination page={page} totalRecords={totalRecords} pageSize={pageSize} handlePageChange={handlePageChange} />
+      <Pagination
+        page={page}
+        totalRecords={totalRecords}
+        pageSize={pageSize}
+        handlePageChange={handlePageChange}
+        pageArray={pageArray}
+        pageLength={pageLength}
+        isPaginationButtonDisable={isPaginationButtonDisable}
+      />
     </div>
   );
 }

@@ -122,3 +122,11 @@ thead{
   top: 0;
   z-index: 3;
 }
+
+table {
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+
+  height: calc(100vh - 5.25rem);
+}
