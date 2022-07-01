@@ -4,22 +4,27 @@ const activities = ["location", "device", "user", "userAction"];
 
 export default function TableRow({ activity, handleRowClick, activityIdx }) {
   const getTime = () => {
-    if (activity?.userAction?.time) {
-      // const day = new Date(activity?.userAction?.time).getDay()
-      const date = new Date(activity?.userAction?.time).getDate();
-      const month = new Date(activity?.userAction?.time).getMonth();
-      const year = new Date(activity?.userAction?.time).getFullYear();
+    let timeStamp = activity?.userAction?.timestamp 
+    if(( typeof timeStamp ) === 'string') timeStamp = parseInt(timeStamp)
+    if (timeStamp) {
+
+      // const day = new Date(timeStamp).getDay()
+      const date = new Date(timeStamp).getDate();
+      const month = new Date(timeStamp).getMonth();
+      const year = new Date(timeStamp).getFullYear();
       return `${date}/${month}/${year}`;
     } else return "";
   };
 
   const getTimeStamp = () => {
-    if (activity?.userAction?.timestamp) {
-      const hour = new Date(activity?.userAction?.timestamp).getHours();
-      const mins = new Date(activity?.userAction?.timestamp).getMinutes();
-      const secs = new Date(activity?.userAction?.timestamp).getSeconds();
+    let timeStamp = activity?.userAction?.timestamp 
+    if(( typeof timeStamp ) === 'string') timeStamp = parseInt(timeStamp)
+    if (timeStamp) {
+      const hour = new Date(timeStamp).getHours();
+      const mins = new Date(timeStamp).getMinutes();
+      const secs = new Date(timeStamp).getSeconds();
       const miliSecs = new Date(
-        activity?.userAction?.timestamp
+        timeStamp
       ).getMilliseconds();
       return `${hour}:${mins}:${secs}:${miliSecs}`;
     } else return null;
