@@ -30,7 +30,7 @@ ul{
 }
 
 .page__btn, .page__numbers, .page__dots  {
-  padding: 1rem;
+  padding: .625rem;
 }
 
 .page__numbers{
