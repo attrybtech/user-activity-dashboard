@@ -3,12 +3,13 @@ import Table from "./components/Table";
 import "./components/index.css";
 import Modal from "./components/Modal";
 import ClickAwayListener from "react-click-away-listener";
-import AppHeader from "./components/AppHeader";
 import {
   getActivities,
   getUniqueCities,
   getUniqueCountries,
 } from "./components/services";
+import Pagination from "./components/Pagination";
+import { DEFAULT_PAGE_SIZE } from "./constants";
 
 function App() {
   const [userActivities, setUserActivities] = useState([]);
@@ -18,14 +19,16 @@ function App() {
   const [modalContent, setModalContent] = useState({});
   const [modalHeading, setModalHeading] = useState("");
 
-  const [pageSize, setPageSize] = useState(0);
+  const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE);
   const [page, setPage] = useState(1);
+  const [totalRecords, setTotalRecords] = useState(0)
 
   const [uniqueCountries, setUniqueCountries] = useState([]);
   const [uniqueCities, setUniqueCities] = useState([]);
 
   const [selectedCountries, setSelectedCountries] = useState([]);
   const [selectedCities, setSelectedCities] = useState([]);
+  const [selectedDeviceCategory, setSelectedDeviceCategory] = useState('')
 
   useEffect(() => {
     getInitialDashBoardData();
@@ -36,9 +39,9 @@ function App() {
   }, [selectedCountries]);
 
   useEffect(() => {
-    if (selectedCountries.length || selectedCities.length)
+    if (selectedCountries.length || selectedCities.length ||selectedDeviceCategory.length )
       updateUserActivities();
-  }, [selectedCountries, selectedCities]);
+  }, [selectedCountries, selectedCities, selectedDeviceCategory, page]);
 
   const updateCitiesByCountry = async () => {
     if (selectedCountries.length) {
@@ -72,9 +75,11 @@ function App() {
       pageSize,
       page,
       selectedCities,
-      selectedCountries
+      selectedCountries,
+      selectedDeviceCategory
     );
-    return activities;
+    setTotalRecords(activities.totalRecords)
+    return activities?.data;
   };
 
   const handleRowClick = (idx, property) => {
@@ -106,6 +111,21 @@ function App() {
     }
   };
 
+  const handleDeviceCategorySelection = (value,checked) => {
+    if (checked) {
+      const tempDevices = [...selectedDeviceCategory, value];
+      setSelectedDeviceCategory([...new Set(tempDevices)]);
+    } else {
+      setSelectedDeviceCategory([
+        ...selectedDeviceCategory.filter((option) => option !== value),
+      ]);
+    }
+  }
+
+  const handlePageChange = (pageVal) => {
+    setPage(pageVal)
+  }
+
   return (
     <div className="App">
       <Table
@@ -118,12 +138,15 @@ function App() {
         selectedCountries={selectedCountries}
         handleCitySelection={handleCitySelection}
         handleCountrySelection={handleCountrySelection}
+        handleDeviceCategorySelection={handleDeviceCategorySelection}
+        selectedDeviceCategory={selectedDeviceCategory}
       />
       {showModal && (
         <ClickAwayListener onClickAway={() => setShowModal(false)}>
           <Modal activity={modalContent} modalHeading={modalHeading} />
         </ClickAwayListener>
       )}
+      <Pagination page={page} totalRecords={totalRecords} pageSize={pageSize} handlePageChange={handlePageChange} />
     </div>
   );
 }

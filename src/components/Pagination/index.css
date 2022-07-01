@@ -1,0 +1,45 @@
+.pagination_container{
+  /* display: flex; */
+
+  background-color:white;
+  border-radius: 4px;
+
+  width: 100%;
+
+  position: sticky;
+  bottom: 0;
+  z-index: 3;
+}
+
+.pages{
+  display: flex;
+  align-items: center;
+
+}
+
+ul{
+  list-style: none;
+}
+
+.page__btn, .page__numbers, .page__dots  {
+  padding: 1rem;
+}
+
+.page__numbers{
+  font-size: 1.4rem;
+  line-height: 1.25rem;
+  cursor: pointer;
+}
+
+.page__numbers.active{
+  background-color:#5f9ea0 ;
+  color: white;
+}
+
+#pages_container{
+  display: flex;
+  align-items: center;
+  overflow: scroll;
+
+  background-color: white;
+}

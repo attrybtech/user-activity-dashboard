@@ -10,6 +10,8 @@
   text-align: left;
   background-color: #5f9ea0;
   color: #fff;
+
+  margin-bottom: 5.3125rem;
 }
 
 th {
@@ -112,4 +114,11 @@ td {
   font-size: 0.75rem;
   line-height: 1rem;
   color: #172b4d;
+}
+
+
+thead{
+  position: sticky;
+  top: 0;
+  z-index: 3;
 }

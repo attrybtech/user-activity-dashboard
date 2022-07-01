@@ -12,7 +12,9 @@ export default function Table({
   handleCitySelection,
   handleCountrySelection,
   selectedCities,
-  selectedCountries
+  selectedCountries,
+  handleDeviceCategorySelection,
+  selectedDeviceCategory
 }) {
   const [showDeviceCategoryFilter, setShowDeviceCategoryFilter] =
     useState(false);
@@ -22,6 +24,7 @@ export default function Table({
   return (
     <table id="user-activities">
       <thead>
+        
         <tr>
           <th>Date</th>
           <th>Time</th>
@@ -37,8 +40,9 @@ export default function Table({
             {showDeviceCategoryFilter && (
                 <FilterDropDown
                   options={DEVICE_CATEGORY_COLUMN_FILTER_OPTIONS}
-                  handleCheckboxSelection={() => {}}
+                  handleCheckboxSelection={handleDeviceCategorySelection}
                   handleOutsideFilterClick={()=>setShowDeviceCategoryFilter(false)}
+                  selectedArray={selectedDeviceCategory}
                 />
             )}
           </th>

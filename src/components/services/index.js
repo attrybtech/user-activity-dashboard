@@ -11,16 +11,15 @@ export const getActivities = async (
   pageSize,
   page = DEFAULT_PAGE,
   cities = DEFAULT_CITY,
-  countries = DEFAULT_COUNTRY
+  countries = DEFAULT_COUNTRY,
+  deviceCategory=''
 ) => {
   if (!pageSize) pageSize = DEFAULT_PAGE_SIZE;
   try {
     const response = await axios.get(
-      `${BASE_URL}/user-activity/?pageSize=${pageSize}&page=${page}&city=${JSON.stringify(
-        cities
-      )}&country=${JSON.stringify(countries)}`
+      `${BASE_URL}/user-activity/?pageSize=${pageSize}&page=${page}&city=${JSON.stringify(cities)}&country=${JSON.stringify(countries)}&deviceCategory=${JSON.stringify(deviceCategory)}`
     );
-    return response?.data?.data;
+    return response?.data;
   } catch (error) {
     return [];
   }
