@@ -1,15 +1,16 @@
 {
   "files": {
-    "main.css": "/user-activity-dashboard/static/css/main.9af41847.css",
-    "main.js": "/user-activity-dashboard/static/js/main.f908a193.js",
+    "main.css": "/user-activity-dashboard/static/css/main.9892a8d6.css",
+    "main.js": "/user-activity-dashboard/static/js/main.e757f67d.js",
     "static/js/787.b76b044c.chunk.js": "/user-activity-dashboard/static/js/787.b76b044c.chunk.js",
     "index.html": "/user-activity-dashboard/index.html",
-    "main.9af41847.css.map": "/user-activity-dashboard/static/css/main.9af41847.css.map",
-    "main.f908a193.js.map": "/user-activity-dashboard/static/js/main.f908a193.js.map",
+    "static/media/chevron-down.svg": "/user-activity-dashboard/static/media/chevron-down.5f39cbed18bf84eb78acb2c1fcd252e3.svg",
+    "main.9892a8d6.css.map": "/user-activity-dashboard/static/css/main.9892a8d6.css.map",
+    "main.e757f67d.js.map": "/user-activity-dashboard/static/js/main.e757f67d.js.map",
     "787.b76b044c.chunk.js.map": "/user-activity-dashboard/static/js/787.b76b044c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9af41847.css",
-    "static/js/main.f908a193.js"
+    "static/css/main.9892a8d6.css",
+    "static/js/main.e757f67d.js"
   ]
 }
