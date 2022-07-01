@@ -130,3 +130,16 @@ table {
 
   height: calc(100vh -  4.375rem);
 }
+
+.table_column-filter-header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  line-height: 1.25rem;
+  cursor: pointer;
+}
+
+.table_column_filter_icon{
+  width: 1.25rem;
+  height: 1.25rem;
+}

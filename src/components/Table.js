@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import TableRow from "./TableRow";
 import FilterDropDown from "./ColumnFilter/FilterDropDown";
 import { DEVICE_CATEGORY_COLUMN_FILTER_OPTIONS } from "../constants";
+import ChevronDownIcon from "../assets/icons/chevron-down.svg";
 
 export default function Table({
   userActivities = [],
@@ -14,7 +15,7 @@ export default function Table({
   selectedCities,
   selectedCountries,
   handleDeviceCategorySelection,
-  selectedDeviceCategory
+  selectedDeviceCategory,
 }) {
   const [showDeviceCategoryFilter, setShowDeviceCategoryFilter] =
     useState(false);
@@ -24,7 +25,6 @@ export default function Table({
   return (
     <table id="user-activities">
       <thead>
-        
         <tr>
           <th>Date</th>
           <th>Time</th>
@@ -36,14 +36,19 @@ export default function Table({
               }
             }}
           >
-            <div>Device Category</div>
+            <div className="table_column-filter-header" >
+              Device Category
+              <img src={ChevronDownIcon} className="table_column_filter_icon" />
+            </div>
             {showDeviceCategoryFilter && (
-                <FilterDropDown
-                  options={DEVICE_CATEGORY_COLUMN_FILTER_OPTIONS}
-                  handleCheckboxSelection={handleDeviceCategorySelection}
-                  handleOutsideFilterClick={()=>setShowDeviceCategoryFilter(false)}
-                  selectedArray={selectedDeviceCategory}
-                />
+              <FilterDropDown
+                options={DEVICE_CATEGORY_COLUMN_FILTER_OPTIONS}
+                handleCheckboxSelection={handleDeviceCategorySelection}
+                handleOutsideFilterClick={() =>
+                  setShowDeviceCategoryFilter(false)
+                }
+                selectedArray={selectedDeviceCategory}
+              />
             )}
           </th>
           <th
@@ -54,12 +59,15 @@ export default function Table({
               }
             }}
           >
-            <div>Country</div>
+            <div className="table_column-filter-header" >
+              Country
+              <img src={ChevronDownIcon} className="table_column_filter_icon" />
+            </div>
             {showCountryFilter && (
               <FilterDropDown
                 options={uniqueCountries}
                 handleCheckboxSelection={handleCountrySelection}
-                handleOutsideFilterClick={()=>setShowCountryFilter(false)}
+                handleOutsideFilterClick={() => setShowCountryFilter(false)}
                 selectedArray={selectedCountries}
               />
             )}
@@ -72,12 +80,15 @@ export default function Table({
               }
             }}
           >
-            <div>City</div>
+            <div className="table_column-filter-header" >
+              City
+              <img src={ChevronDownIcon} className="table_column_filter_icon" />
+            </div>
             {showCityFilter && (
               <FilterDropDown
                 options={uniqueCities}
                 handleCheckboxSelection={handleCitySelection}
-                handleOutsideFilterClick={()=>setShowCityFilter(false)}
+                handleOutsideFilterClick={() => setShowCityFilter(false)}
                 selectedArray={selectedCities}
               />
             )}
