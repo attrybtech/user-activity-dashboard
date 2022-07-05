@@ -80,8 +80,8 @@ function App() {
   };
 
   const updateContriesBySelectedCities = async () => {
-    // const countries = await getCountriesByCities(selectedCities);
-    // setSelectedCountries(countries);
+    // const countries = await getCountriesByCities(selectedCities)
+    // setSelectedCountries(countries)
   };
 
   const getInitialDashBoardData = async () => {
