@@ -1,38 +1,44 @@
 import React from "react";
 
-const activities = ["location", "device", "user", "userAction"];
+const activities = [
+  { label: "Expand location", property: "location" },
+  { label: "Expand device", property: "device" },
+  { label: "Expand user", property: "user" },
+  { label: "Expand userAction", property: "userAction" },
+];
 
 export default function TableRow({ activity, handleRowClick, activityIdx }) {
   const getTime = () => {
-    let timeStamp = activity?.userAction?.timestamp 
-    if(( typeof timeStamp ) === 'string') timeStamp = parseInt(timeStamp)
+    let timeStamp = activity?.userAction?.timestamp;
+    if (typeof timeStamp === "string") timeStamp = parseInt(timeStamp);
     if (timeStamp) {
-
       // const day = new Date(timeStamp).getDay()
       const date = new Date(timeStamp).getDate();
       const month = new Date(timeStamp).getMonth();
       const year = new Date(timeStamp).getFullYear();
-      return `${date}/${month}/${year}`;
+      return `${date}/${month + 1}/${year}`;
     } else return "";
   };
 
   const getTimeStamp = () => {
-    let timeStamp = activity?.userAction?.timestamp 
-    if(( typeof timeStamp ) === 'string') timeStamp = parseInt(timeStamp)
+    let timeStamp = activity?.userAction?.timestamp;
+    if (typeof timeStamp === "string") timeStamp = parseInt(timeStamp);
     if (timeStamp) {
-      const hour = new Date(timeStamp).getHours();
+      let hour = new Date(timeStamp).getHours();
       const mins = new Date(timeStamp).getMinutes();
       const secs = new Date(timeStamp).getSeconds();
-      const miliSecs = new Date(
-        timeStamp
-      ).getMilliseconds();
-      return `${hour}:${mins}:${secs}:${miliSecs} ${findMeridiemIndicator(new Date(timeStamp))} `;
+      let hours = hour % 12;
+      hours = hours ? hours : 12; // the hour '0' should be '12'
+      // const miliSecs = new Date(timeStamp).getMilliseconds();
+      return `${hours}:${mins}:${secs} ${findMeridiemIndicator(
+        new Date(timeStamp)
+      )} `;
     } else return null;
   };
 
   function findMeridiemIndicator(date) {
     var hours = date?.getHours();
-    var ampm = hours >= 12 ? 'PM' : 'AM';
+    var ampm = hours >= 12 ? "PM" : "AM";
     return ampm;
   }
 
@@ -51,11 +57,11 @@ export default function TableRow({ activity, handleRowClick, activityIdx }) {
 
       {activities.map((element, idx) => (
         <td
-          className="table_row-text"
-          onClick={() => handleRowClick(activityIdx, element)}
+          className="table_row-text expandable-rows"
+          onClick={() => handleRowClick(activityIdx, element.property)}
           key={idx}
         >
-          {element}
+          {element.label}
         </td>
       ))}
     </tr>

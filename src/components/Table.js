@@ -16,17 +16,62 @@ export default function Table({
   selectedCountries,
   handleDeviceCategorySelection,
   selectedDeviceCategory,
+  handleDateSubmit,
+  startDate,
+  setStartDate,
+  endDate,
+  setEndDate,
 }) {
   const [showDeviceCategoryFilter, setShowDeviceCategoryFilter] =
     useState(false);
   const [showCountryFilter, setShowCountryFilter] = useState(false);
   const [showCityFilter, setShowCityFilter] = useState(false);
 
+ 
+
   return (
     <table id="user-activities">
       <thead>
         <tr>
-          <th>Date</th>
+          <th>
+            <div>Date</div>
+            <div className="range__date__input__container">
+              <div className="date__inputs">
+                <div className="range__input_start-date">
+                  <label for="start-date">Start date</label>
+                  <input
+                    type="date"
+                    id="start-date"
+                    name="start-date"
+                    value={startDate}
+                    placeholder="start date"
+                    onChange={(e) =>
+                      setStartDate(e.target.value)
+                    }
+                  />
+                </div>
+                <div className="range__input_end-date">
+                  <label for="end-date">End date</label>
+                  <input
+                    type="date"
+                    id="end-date"
+                    name="end-date"
+                    value={endDate}
+                    placeholder="end date"
+                    onChange={(e) =>
+                      setEndDate(e.target.value)
+                    }
+                  />
+                </div>
+              </div>
+              <button
+                className="range__date__input-submit-btn"
+                onClick={handleDateSubmit}
+              >
+                Apply
+              </button>
+            </div>
+          </th>
           <th>Time</th>
           <th
             onClick={(e) => {
@@ -36,7 +81,7 @@ export default function Table({
               }
             }}
           >
-            <div className="table_column-filter-header" >
+            <div className="table_column-filter-header">
               Device Category
               <img src={ChevronDownIcon} className="table_column_filter_icon" />
             </div>
@@ -59,7 +104,7 @@ export default function Table({
               }
             }}
           >
-            <div className="table_column-filter-header" >
+            <div className="table_column-filter-header">
               Country
               <img src={ChevronDownIcon} className="table_column_filter_icon" />
             </div>
@@ -80,7 +125,7 @@ export default function Table({
               }
             }}
           >
-            <div className="table_column-filter-header" >
+            <div className="table_column-filter-header">
               City
               <img src={ChevronDownIcon} className="table_column_filter_icon" />
             </div>
@@ -96,9 +141,10 @@ export default function Table({
           <th>IP</th>
           <th>User Action</th>
           <th>ID</th>
+          <th>Location</th>
           <th>Device</th>
           <th>User</th>
-          <th>Location</th>
+          
           <th>User-Action</th>
         </tr>
       </thead>

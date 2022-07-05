@@ -3,13 +3,13 @@ import React from "react";
 export default function Modal({ activity={}, modalHeading="" }) {
 
   return (
-    <div id="myModal" className="modal">
+    <div id="expand_activites-modal" className="modal">
         
             <div className="modal-content" id="modal-content" >
             <h1 style={{textAlign:"center"}} >{modalHeading.toUpperCase()}</h1>
-                <table>
+                <table id="expand_activites-modal-table" >
                     <thead>
-                        <tr>
+                        <tr className="expand_activites-modal-table-heading-row" >
                             <th>Key</th>
                             <th>Value</th>
                         </tr>

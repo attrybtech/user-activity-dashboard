@@ -54,6 +54,8 @@ td {
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
   background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+
+  z-index: 3;
 }
 
 /* Modal Content/Box */
@@ -97,6 +99,15 @@ td {
   background-color: #dddddd;
 }
 
+#expand_activites-modal-table {
+  height: calc(100vh - 20rem);
+}
+
+.expand_activites-modal-table-heading-row {
+  background: #fff;
+  z-index: 2;
+}
+
 /* header css */
 
 .app_header {
@@ -116,8 +127,7 @@ td {
   color: #172b4d;
 }
 
-
-thead{
+thead {
   position: sticky;
   top: 0;
   z-index: 3;
@@ -128,10 +138,10 @@ table {
   overflow-x: auto;
   white-space: nowrap;
 
-  height: calc(100vh -  4.375rem);
+  height: calc(100vh - 4.375rem);
 }
 
-.table_column-filter-header{
+.table_column-filter-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -139,7 +149,11 @@ table {
   cursor: pointer;
 }
 
-.table_column_filter_icon{
+.table_column_filter_icon {
   width: 1.25rem;
   height: 1.25rem;
+}
+
+.table_row-text.expandable-rows {
+  color: #35359eeb;
 }

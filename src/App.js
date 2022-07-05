@@ -5,12 +5,13 @@ import Modal from "./components/Modal";
 import ClickAwayListener from "react-click-away-listener";
 import {
   getActivities,
+  getCountriesByCities,
   getUniqueCities,
   getUniqueCountries,
 } from "./components/services";
 import Pagination from "./components/Pagination";
 import { DEFAULT_PAGE_SIZE } from "./constants";
-import './index.css'
+import "./index.css";
 
 const pageArray = ["<< First", "< Prev", "Next >", "Last >>"];
 
@@ -32,7 +33,9 @@ function App() {
 
   const [selectedCountries, setSelectedCountries] = useState([]);
   const [selectedCities, setSelectedCities] = useState([]);
-  const [selectedDeviceCategory, setSelectedDeviceCategory] = useState("");
+  const [selectedDeviceCategory, setSelectedDeviceCategory] = useState([]);
+  const [startDate, setStartDate] = useState();
+  const [endDate, setEndDate] = useState("");
 
   useEffect(() => {
     getInitialDashBoardData();
@@ -48,24 +51,37 @@ function App() {
       selectedCities.length ||
       selectedDeviceCategory.length ||
       page
-    )
+    ) {
       updateUserActivities();
+    }
   }, [selectedCountries, selectedCities, selectedDeviceCategory, page]);
 
   useEffect(() => {
-    setPageLength(Math.floor(totalRecords / pageSize));
+    setPageLength(Math.ceil(totalRecords / pageSize));
   }, [totalRecords]);
 
+  useEffect(() => {
+    if (!selectedCountries.length) getUniqueCitiesByCountry();
+  }, [selectedCountries]);
+
+  useEffect(() => {
+    if (selectedCities.length && !selectedCountries.length)
+      updateContriesBySelectedCities();
+  }, [selectedCities]);
+
   const updateCitiesByCountry = async () => {
-    if (selectedCountries.length) {
-      const cities = await getUniqueCitiesByCountry();
-      setUniqueCities(cities);
-    }
+    const cities = await getUniqueCitiesByCountry();
+    setUniqueCities(cities);
   };
 
   const updateUserActivities = async () => {
     const activities = await getUserActivities();
     setUserActivities(activities);
+  };
+
+  const updateContriesBySelectedCities = async () => {
+    // const countries = await getCountriesByCities(selectedCities);
+    // setSelectedCountries(countries);
   };
 
   const getInitialDashBoardData = async () => {
@@ -89,7 +105,9 @@ function App() {
       page,
       selectedCities,
       selectedCountries,
-      selectedDeviceCategory
+      selectedDeviceCategory,
+      startDate,
+      endDate
     );
     setTotalRecords(activities.totalRecords);
     return activities?.data;
@@ -156,8 +174,18 @@ function App() {
   };
 
   const isPaginationButtonDisable = (idx) => {
-    if( (idx === 0 && page === 1 ) || ( idx=== 1 &&  page === 1 ) || (idx === 2 && pageLength === page) || (idx === 3 && pageLength === page)  ) return true
-    return false
+    if (
+      (idx === 0 && page === 1) ||
+      (idx === 1 && page === 1) ||
+      (idx === 2 && pageLength === page) ||
+      (idx === 3 && pageLength === page)
+    )
+      return true;
+    return false;
+  };
+
+  const handleDateSubmit = () => {
+    updateUserActivities();
   };
 
   return (
@@ -174,6 +202,11 @@ function App() {
         handleCountrySelection={handleCountrySelection}
         handleDeviceCategorySelection={handleDeviceCategorySelection}
         selectedDeviceCategory={selectedDeviceCategory}
+        handleDateSubmit={handleDateSubmit}
+        startDate={startDate}
+        setStartDate={setStartDate}
+        endDate={endDate}
+        setEndDate={setEndDate}
       />
       {showModal && (
         <ClickAwayListener onClickAway={() => setShowModal(false)}>
