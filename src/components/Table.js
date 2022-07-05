@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TableRow from "./TableRow";
 import FilterDropDown from "./ColumnFilter/FilterDropDown";
 import { DEVICE_CATEGORY_COLUMN_FILTER_OPTIONS } from "../constants";
@@ -27,8 +27,6 @@ export default function Table({
   const [showCountryFilter, setShowCountryFilter] = useState(false);
   const [showCityFilter, setShowCityFilter] = useState(false);
 
- 
-
   return (
     <table id="user-activities">
       <thead>
@@ -45,9 +43,7 @@ export default function Table({
                     name="start-date"
                     value={startDate}
                     placeholder="start date"
-                    onChange={(e) =>
-                      setStartDate(e.target.value)
-                    }
+                    onChange={(e) => setStartDate(e.target.value)}
                   />
                 </div>
                 <div className="range__input_end-date">
@@ -58,9 +54,7 @@ export default function Table({
                     name="end-date"
                     value={endDate}
                     placeholder="end date"
-                    onChange={(e) =>
-                      setEndDate(e.target.value)
-                    }
+                    onChange={(e) => setEndDate(e.target.value)}
                   />
                 </div>
               </div>
@@ -144,7 +138,7 @@ export default function Table({
           <th>Location</th>
           <th>Device</th>
           <th>User</th>
-          
+
           <th>User-Action</th>
         </tr>
       </thead>

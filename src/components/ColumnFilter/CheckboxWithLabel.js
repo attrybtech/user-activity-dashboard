@@ -1,7 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-export default function CheckboxWithLabel({ label, handleCheckboxSelection, selectedArray }) {
+export default function CheckboxWithLabel({
+  label,
+  handleCheckboxSelection,
+  selectedArray,
+}) {
   const [checked, setChecked] = useState(selectedArray.includes(label));
+
+  useEffect(() => {
+    setChecked(selectedArray.includes(label));
+  }, [selectedArray]);
+
   return (
     <div
       className="row"
@@ -11,7 +20,11 @@ export default function CheckboxWithLabel({ label, handleCheckboxSelection, sele
         setChecked(!checked);
       }}
     >
-      <input type="checkbox" checked={checked} onChange={() => {}} />
+      <input
+        type="checkbox"
+        checked={selectedArray.includes(label)}
+        onChange={(e) => {}}
+      />
       <span className="label">{label}</span>
     </div>
   );

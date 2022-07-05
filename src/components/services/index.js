@@ -55,12 +55,12 @@ export const getUniqueCities = async (countries) => {
 };
 
 export const getCountriesByCities = async (cities) => {
-  // try {
-  //   const response = await axios.get(
-  //     `${BASE_URL}/get-distinct-city?cities=${JSON.stringify(cities)}`
-  //   );
-  //   return response?.data?.data;
-  // } catch (error) {
-  //   return [];
-  // }
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/get-countries-by-cities?cities=${JSON.stringify(cities)}`
+    );
+    return response?.data?.data;
+  } catch (error) {
+    return [];
+  }
 };

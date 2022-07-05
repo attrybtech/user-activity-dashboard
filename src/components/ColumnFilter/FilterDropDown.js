@@ -12,11 +12,12 @@ export default function FilterDropDown({
   return (
     <ClickAwayListener onClickAway={handleOutsideFilterClick} >
       <div className="list">
-        {options.map((option) => (
+        {options.map((option,idx) => (
           <CheckboxWithLabel
             label={option}
             handleCheckboxSelection={handleCheckboxSelection}
             selectedArray={selectedArray}
+            key={idx}
           />
         ))}
       </div>
