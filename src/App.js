@@ -6,12 +6,14 @@ import ClickAwayListener from "react-click-away-listener";
 import {
   getActivities,
   getCountriesByCities,
+  getDownloadData,
   getUniqueCities,
   getUniqueCountries,
 } from "./components/services";
 import Pagination from "./components/Pagination";
 import { DEFAULT_PAGE_SIZE } from "./constants";
 import "./index.css";
+import { exportToJson } from "./components/helpers";
 
 const pageArray = ["<< First", "< Prev", "Next >", "Last >>"];
 
@@ -80,8 +82,8 @@ function App() {
   };
 
   const updateContriesBySelectedCities = async () => {
-    const countries = await getCountriesByCities(selectedCities)
-    setSelectedCountries(countries)
+    const countries = await getCountriesByCities(selectedCities);
+    setSelectedCountries(countries);
   };
 
   const getInitialDashBoardData = async () => {
@@ -188,6 +190,18 @@ function App() {
     updateUserActivities();
   };
 
+  const handleDownloadClick = async (e) => {
+    const downloadData = await getDownloadData(
+      selectedCities,
+      selectedCountries,
+      selectedDeviceCategory,
+      startDate,
+      endDate
+    );
+
+    exportToJson(e, downloadData?.data);
+  };
+
   return (
     <div className="App">
       <Table
@@ -221,6 +235,7 @@ function App() {
         pageArray={pageArray}
         pageLength={pageLength}
         isPaginationButtonDisable={isPaginationButtonDisable}
+        handleDownloadClick={handleDownloadClick}
       />
     </div>
   );

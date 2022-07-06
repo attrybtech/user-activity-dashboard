@@ -64,3 +64,27 @@ export const getCountriesByCities = async (cities) => {
     return [];
   }
 };
+
+export const getDownloadData = async (
+  cities = DEFAULT_CITY,
+  countries = DEFAULT_COUNTRY,
+  deviceCategory = [],
+  startDate = "",
+  endDate = ""
+) => {
+
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/download?&city=${JSON.stringify(
+        cities
+      )}&country=${JSON.stringify(countries)}&deviceCategory=${JSON.stringify(
+        deviceCategory
+      )}&startDate=${formatDateInMilliSeconds(
+        startDate
+      )}&endDate=${formatDateInMilliSeconds(endDate)}`
+    );
+    return response?.data;
+  } catch (error) {
+    return [];
+  }
+};

@@ -9,6 +9,7 @@ export default function Pagination({
   pageArray,
   pageLength,
   isPaginationButtonDisable,
+  handleDownloadClick,
 }) {
   return (
     <div className="pagination_container">
@@ -27,6 +28,14 @@ export default function Pagination({
           </li>
         ))}
       </ul>
+
+      <button
+        className={`page__numbers`}
+        onClick={handleDownloadClick}
+        style={{position:'absolute', right:30}}
+      >
+        Download
+      </button>
     </div>
   );
 }
