@@ -1,0 +1,48 @@
+.modal-content.date_picker_modal {
+    width: 25rem;
+    height: 15rem;
+}
+
+.range__date__input__container {
+    width: 100%;
+    height: 100%;
+
+    position: relative;
+}
+
+
+.date__inputs{
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    height: 80%;
+    width: fit-content;
+
+    gap: 5rem;
+    margin: 0;
+}
+
+.range__input_start-date, .range__input_end-date{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    color: #262a4b;
+
+    height: 100%;
+}
+
+.date_label-text {
+    font-weight: 300;
+    text-align: center;
+    font-size: 1.25rem;
+
+    margin-bottom: 1rem;
+}
+
+.range__date__input-submit-btn{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}

@@ -8,7 +8,7 @@
   padding-top: 5px;
   padding-bottom: 5px;
   text-align: left;
-  background-color: #5f9ea0;
+  background-color: #262a4b;
   color: #fff;
 
   margin-bottom: 5.3125rem;
@@ -27,7 +27,7 @@ th {
 
 #user-activities td,
 #user-activities th {
-  border: 1px solid #dddddd91;
+  border: 0.5px solid #dddddd91;
   padding: 1rem;
   min-width: 120px;
   font-size: small;
@@ -99,6 +99,7 @@ td {
   background-color: #dddddd;
 }
 
+
 #expand_activites-modal-table {
   height: calc(100vh - 20rem);
 }
@@ -152,8 +153,13 @@ table {
 .table_column_filter_icon {
   width: 1.25rem;
   height: 1.25rem;
+  filter: grayscale(1) invert(1);
 }
 
 .table_row-text.expandable-rows {
   color: #35359eeb;
+}
+
+.user-activities_table{
+  box-shadow: -2px 3px 45px -18px rgb(0 0 0 / 59%);
 }

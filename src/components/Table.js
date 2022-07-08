@@ -3,6 +3,7 @@ import TableRow from "./TableRow";
 import FilterDropDown from "./ColumnFilter/FilterDropDown";
 import { DEVICE_CATEGORY_COLUMN_FILTER_OPTIONS } from "../constants";
 import ChevronDownIcon from "../assets/icons/chevron-down.svg";
+import DatePickerModal from "./DatePicker";
 
 export default function Table({
   userActivities = [],
@@ -26,45 +27,44 @@ export default function Table({
     useState(false);
   const [showCountryFilter, setShowCountryFilter] = useState(false);
   const [showCityFilter, setShowCityFilter] = useState(false);
+  const [showDatePickerModal, setShowDatePickerModal] = useState(false);
 
   return (
     <table id="user-activities">
       <thead>
-        <tr>
-          <th>
-            <div>Date</div>
-            <div className="range__date__input__container">
-              <div className="date__inputs">
-                <div className="range__input_start-date">
-                  <label for="start-date">Start date</label>
-                  <input
-                    type="date"
-                    id="start-date"
-                    name="start-date"
-                    value={startDate}
-                    placeholder="start date"
-                    onChange={(e) => setStartDate(e.target.value)}
-                  />
-                </div>
-                <div className="range__input_end-date">
-                  <label for="end-date">End date</label>
-                  <input
-                    type="date"
-                    id="end-date"
-                    name="end-date"
-                    value={endDate}
-                    placeholder="end date"
-                    onChange={(e) => setEndDate(e.target.value)}
-                  />
-                </div>
-              </div>
-              <button
-                className="range__date__input-submit-btn"
-                onClick={handleDateSubmit}
-              >
-                Apply
-              </button>
+        <tr className="user-activities_table">
+          <th
+            onClick={(e) => {
+              if (!showDatePickerModal) {
+                e.preventDefault();
+                setShowDatePickerModal(!showDatePickerModal);
+              }
+            }}
+          >
+            <div className="table_column-filter-header">
+              Date
+              <img
+                src={ChevronDownIcon}
+                className="table_column_filter_icon"
+                style={{ transform: "rotate(270deg)" }}
+              />
             </div>
+            {showDatePickerModal && (
+              <DatePickerModal
+                startDate={startDate}
+                setStartDate={setStartDate}
+                endDate={endDate}
+                setEndDate={setEndDate}
+                handleDateSubmit={() => {
+                  handleDateSubmit();
+                  setShowDatePickerModal(false);
+                }}
+                handleOutsideDatePickerClick={() => {
+                  console.log("asdfa");
+                  setShowDatePickerModal(false);
+                }}
+              />
+            )}
           </th>
           <th>Time</th>
           <th

@@ -17,7 +17,7 @@ export default function Pagination({
         {pageArray.map((page, idx) => (
           <li key={idx}>
             <button
-              className={`page__numbers ${
+              className={`btn btn--primary ${
                 isPaginationButtonDisable(idx) && "--disabled"
               }`}
               onClick={() => handlePageChange(page)}
@@ -30,7 +30,7 @@ export default function Pagination({
       </ul>
 
       <button
-        className={`page__numbers`}
+        className={`btn btn--primary`}
         onClick={handleDownloadClick}
         style={{position:'absolute', right:30}}
       >
