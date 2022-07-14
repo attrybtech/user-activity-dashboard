@@ -99,7 +99,6 @@ td {
   background-color: #dddddd;
 }
 
-
 #expand_activites-modal-table {
   height: calc(100vh - 20rem);
 }
@@ -160,6 +159,32 @@ table {
   color: #35359eeb;
 }
 
-.user-activities_table{
+.table_row-text.expandable-rows:hover {
+  text-decoration: underline;
+}
+
+.user-activities_table {
   box-shadow: -2px 3px 45px -18px rgb(0 0 0 / 59%);
+}
+
+.table_row-text {
+  transition: all 0.5s;
+}
+
+/* animate table  */
+
+.table_row-text {
+  /* opacity: 0; */
+  animation: table-row 1s;
+}
+
+
+
+@keyframes table-row {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

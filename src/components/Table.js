@@ -142,24 +142,18 @@ export default function Table({
           <th>User-Action</th>
         </tr>
       </thead>
-      <tbody>
-        <>
-          {loading ? (
-            "Loading..."
-          ) : (
-            <>
-              {userActivities.map((activity, idx) => (
-                <TableRow
-                  activity={activity}
-                  key={idx}
-                  handleRowClick={handleRowClick}
-                  activityIdx={idx}
-                />
-              ))}
-            </>
-          )}
-        </>
-      </tbody>
+      <>
+        <tbody>
+          {userActivities.map((activity, idx) => (
+            <TableRow
+              activity={activity}
+              key={idx}
+              handleRowClick={handleRowClick}
+              activityIdx={idx}
+            />
+          ))}
+        </tbody>
+      </>
     </table>
   );
 }
