@@ -11,8 +11,15 @@ export default function DatePickerModal({
   handleDateSubmit,
   handleOutsideDatePickerClick,
 }) {
+
+  const getMaxDate = () => {
+    const date = new Date()
+    const month =( date.getMonth() + 1) > 10 ? `${date.getMonth() + 1}` : `0${date.getMonth() + 1}`
+    return `${date.getFullYear()}-${month}-${date.getDate()}`
+  }
+
   return (
-    <div id="expand_activites-modal" className="modal">
+    <div id="expand_activites-modal" className="modal expand_activites_date-picker-modal">
       <ClickAwayListener onClickAway={handleOutsideDatePickerClick}>
         <div className="modal-content date_picker_modal" id="modal-content">
           <div className="range__date__input__container">
@@ -26,6 +33,7 @@ export default function DatePickerModal({
                   value={startDate}
                   placeholder="start date"
                   onChange={(e) => setStartDate(e.target.value)}
+                  max={getMaxDate()}
                 />
               </div>
               <div className="range__input_end-date">
@@ -37,6 +45,8 @@ export default function DatePickerModal({
                   value={endDate}
                   placeholder="end date"
                   onChange={(e) => setEndDate(e.target.value)}
+                  max={getMaxDate()}
+                  min={startDate}
                 />
               </div>
             </div>

@@ -53,7 +53,7 @@ export default function TableRow({ activity, handleRowClick, activityIdx }) {
         {activity?.user?.ipAddress || activity?.location?.ipAddress}
       </td>
       <td className="table_row-text">{activity?.userAction?.action}</td>
-      <td id="id-field">{activity?.user?.id}</td>
+      <td id="id-field" className="table_row-text">{activity?.user?.id}</td>
 
       {activities.map((element, idx) => (
         <td

@@ -221,7 +221,6 @@ function App() {
         setStartDate={setStartDate}
         endDate={endDate}
         setEndDate={setEndDate}
-        
       />
       {showModal && (
         <ClickAwayListener onClickAway={() => setShowModal(false)}>

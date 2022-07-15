@@ -41,12 +41,12 @@ export default function Table({
               }
             }}
           >
-            <div className="table_column-filter-header">
+            <div className="table_column-filter-header date_picker-range">
               Date
               <img
                 src={ChevronDownIcon}
                 className="table_column_filter_icon"
-                style={{ transform: "rotate(270deg)" }}
+                // style={{ transform: "rotate(270deg)" }}
               />
             </div>
             {showDatePickerModal && (
