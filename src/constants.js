@@ -8,3 +8,5 @@ export const DEVICE_CATEGORY_COLUMN_FILTER_OPTIONS = [
   "mobile",
   "tablet",
 ];
+export const START_DATE = "start-date";
+export const END_DATE = "end-date";

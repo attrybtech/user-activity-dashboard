@@ -5,6 +5,8 @@ import {
   DEFAULT_COUNTRY,
   DEFAULT_PAGE,
   DEFAULT_PAGE_SIZE,
+  END_DATE,
+  START_DATE,
 } from "../../constants";
 import { formatDateInMilliSeconds } from "../helpers";
 
@@ -25,8 +27,9 @@ export const getActivities = async (
       )}&country=${JSON.stringify(countries)}&deviceCategory=${JSON.stringify(
         deviceCategory
       )}&startDate=${formatDateInMilliSeconds(
-        startDate
-      )}&endDate=${formatDateInMilliSeconds(endDate)}`
+        startDate,
+        START_DATE
+      )}&endDate=${formatDateInMilliSeconds(endDate, END_DATE)}`
     );
     return response?.data;
   } catch (error) {
@@ -72,7 +75,6 @@ export const getDownloadData = async (
   startDate = "",
   endDate = ""
 ) => {
-
   try {
     const response = await axios.get(
       `${BASE_URL}/download?&city=${JSON.stringify(
