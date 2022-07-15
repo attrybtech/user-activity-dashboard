@@ -223,9 +223,11 @@ function App() {
         setEndDate={setEndDate}
       />
       {showModal && (
-        <ClickAwayListener onClickAway={() => setShowModal(false)}>
-          <Modal activity={modalContent} modalHeading={modalHeading} />
-        </ClickAwayListener>
+        <Modal
+          activity={modalContent}
+          modalHeading={modalHeading}
+          setShowModal={setShowModal}
+        />
       )}
       <Pagination
         page={page}
