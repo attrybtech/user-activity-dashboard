@@ -8,7 +8,7 @@ import {
   END_DATE,
   START_DATE,
 } from "../../constants";
-import { formatDateInMilliSeconds } from "../helpers";
+import { formatDateInMilliSeconds } from "../pages/dashboard/helpers";
 
 export const getActivities = async (
   pageSize,

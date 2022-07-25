@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import TableRow from "./TableRow";
 import FilterDropDown from "./ColumnFilter/FilterDropDown";
-import { DEVICE_CATEGORY_COLUMN_FILTER_OPTIONS } from "../constants";
-import ChevronDownIcon from "../assets/icons/chevron-down.svg";
+import { DEVICE_CATEGORY_COLUMN_FILTER_OPTIONS } from "../../../constants";
+import ChevronDownIcon from "../../../assets/icons/chevron-down.svg";
 import DatePickerModal from "./DatePicker";
 
 export default function Table({

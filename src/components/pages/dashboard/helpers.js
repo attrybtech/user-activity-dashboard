@@ -1,4 +1,4 @@
-import { END_DATE, START_DATE } from "../constants";
+import { END_DATE, START_DATE } from "../../../constants";
 
 export const formatDateInMilliSeconds = (date, dateFormat) => {
   const formatedDate = new Date(date);

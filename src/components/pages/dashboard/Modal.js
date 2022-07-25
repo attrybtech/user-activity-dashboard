@@ -1,6 +1,6 @@
 import React from "react";
 import ClickAwayListener from "react-click-away-listener";
-import EmptyStateImg from "../assets/empty-state.svg";
+import EmptyStateImg from "../../../assets/empty-state.svg";
 
 export default function Modal({
   activity = {},
