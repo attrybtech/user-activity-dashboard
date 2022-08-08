@@ -1,4 +1,4 @@
-.filter_drop-down{
+.filter_drop-down {
   border: 1px solid #ddd;
   width: 100%;
   border-radius: 4px;
@@ -14,6 +14,9 @@
 
   background: white;
   z-index: 2;
+
+  max-height: 18rem;
+  overflow: scroll;
 }
 
 .row {
