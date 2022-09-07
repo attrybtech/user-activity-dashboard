@@ -22,7 +22,7 @@ export const getActivities = async (
   if (!pageSize) pageSize = DEFAULT_PAGE_SIZE;
   try {
     const response = await axios.get(
-      `${BASE_URL}/user-activity/?pageSize=${pageSize}&page=${page}&city=${JSON.stringify(
+      `${BASE_URL}/dashboard/user-activity/?pageSize=${pageSize}&page=${page}&city=${JSON.stringify(
         cities
       )}&country=${JSON.stringify(countries)}&deviceCategory=${JSON.stringify(
         deviceCategory
@@ -39,7 +39,7 @@ export const getActivities = async (
 
 export const getUniqueCountries = async () => {
   try {
-    const response = await axios.get(`${BASE_URL}/get-distinct-country`);
+    const response = await axios.get(`${BASE_URL}/dashboard/get-distinct-country`);
     return response?.data?.data;
   } catch (error) {
     return [];
@@ -49,7 +49,7 @@ export const getUniqueCountries = async () => {
 export const getUniqueCities = async (countries) => {
   try {
     const response = await axios.get(
-      `${BASE_URL}/get-distinct-city?countries=${JSON.stringify(countries)}`
+      `${BASE_URL}/dashboard/get-distinct-city?countries=${JSON.stringify(countries)}`
     );
     return response?.data?.data;
   } catch (error) {
@@ -60,7 +60,7 @@ export const getUniqueCities = async (countries) => {
 export const getCountriesByCities = async (cities) => {
   try {
     const response = await axios.get(
-      `${BASE_URL}/get-countries-by-cities?cities=${JSON.stringify(cities)}`
+      `${BASE_URL}/dashboard/get-countries-by-cities?cities=${JSON.stringify(cities)}`
     );
     return response?.data?.data;
   } catch (error) {
@@ -77,7 +77,7 @@ export const getDownloadData = async (
 ) => {
   try {
     const response = await axios.get(
-      `${BASE_URL}/download?&city=${JSON.stringify(
+      `${BASE_URL}/dashboard/download?&city=${JSON.stringify(
         cities
       )}&country=${JSON.stringify(countries)}&deviceCategory=${JSON.stringify(
         deviceCategory

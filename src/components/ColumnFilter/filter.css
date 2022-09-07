@@ -16,7 +16,7 @@
   z-index: 2;
 
   max-height: 18rem;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 .row {
